@@ -1,0 +1,11 @@
+{
+  "name": "pogo",
+  "version": "1.0.0",
+  "description": "Pokemon GO friendcode management utility for Discord",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
