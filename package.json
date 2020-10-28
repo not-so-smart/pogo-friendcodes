@@ -7,5 +7,21 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": "github:not-so-smart/pogo-friendcodes",
+  "dependencies": {
+    "discord-akairo": "github:discord-akairo/discord-akairo",
+    "discord.js": "github:discordjs/discord.js",
+    "dotenv": "^8.2.0",
+    "qrcode": "^1.4.4",
+    "sequelize": "^6.3.5",
+    "sqlite3": "^5.0.0",
+    "typescript": "^4.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.5",
+    "@types/qrcode": "^1.3.5",
+    "@types/validator": "^13.1.0",
+    "ts-node": "^9.0.0"
+  }
 }
