@@ -2,4 +2,4 @@ node_modules
 .env
 build
 .vscode
-./database.sqlite
+database.sqlite
