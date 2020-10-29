@@ -7,4 +7,4 @@ build
 
 .vscode
 
-database.sqlite
+./database.sqlite
