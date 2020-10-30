@@ -10,6 +10,7 @@
   "license": "ISC",
   "repository": "github:not-so-smart/pogo-friendcodes",
   "dependencies": {
+    "csv-stringify": "^5.5.1",
     "discord-akairo": "github:discord-akairo/discord-akairo",
     "discord.js": "github:discordjs/discord.js",
     "dotenv": "^8.2.0",

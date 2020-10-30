@@ -4,7 +4,6 @@ import MyClient from "../client";
 import User from "../models/User";
 
 export default async function createPlayerEmbed({ user, client, simple }: { user: User; client: MyClient; simple?: boolean }): Promise<MessageOptions> {
-    const prettyCode = `${user.code.substr(0, 4)} ${user.code.substr(4, 4)} ${user.code.substr(8, 4)}`;
     const qrBuffer = await toBuffer(user.code);
     const avatar = (await client.users.fetch(user.user_id)).displayAvatarURL();
 
@@ -18,7 +17,7 @@ export default async function createPlayerEmbed({ user, client, simple }: { user
         };
 
         return {
-            content: `\`\`\`js\n${prettyCode}\`\`\``,
+            content: `\`\`\`js\n${user.pretty_code}\`\`\``,
             embed: embed,
         }
     }
@@ -28,7 +27,7 @@ export default async function createPlayerEmbed({ user, client, simple }: { user
             name: user.username,
             icon_url: user.team.icon
         },
-        title: prettyCode,
+        title: user.pretty_code,
         description: `<@${user.user_id}>`,
         footer: {
             text: `To copy this code on mobile: /p ${user.username} -c`,

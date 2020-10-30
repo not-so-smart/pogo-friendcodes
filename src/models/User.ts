@@ -16,6 +16,10 @@ export default class User extends Model {
         return Teams[this.team_name]
     }
 
+    public get pretty_code(): string {
+        return `${this.code.substr(0, 4)} ${this.code.substr(4, 4)} ${this.code.substr(8, 4)}`;
+    }
+
 }
 
 User.init({
