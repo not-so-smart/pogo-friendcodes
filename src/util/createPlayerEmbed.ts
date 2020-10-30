@@ -3,10 +3,25 @@ import { toBuffer } from "qrcode";
 import MyClient from "../client";
 import User from "../models/User";
 
-export default async function createPlayerEmbed({ user, client }: { user: User; client: MyClient; }): Promise<MessageOptions> {
+export default async function createPlayerEmbed({ user, client, simple }: { user: User; client: MyClient; simple?: boolean }): Promise<MessageOptions> {
     const prettyCode = `${user.code.substr(0, 4)} ${user.code.substr(4, 4)} ${user.code.substr(8, 4)}`;
     const qrBuffer = await toBuffer(user.code);
     const avatar = (await client.users.fetch(user.user_id)).displayAvatarURL();
+
+    if (simple) {
+        const embed: MessageEmbedOptions = {
+            author: {
+                name: user.username,
+                icon_url: avatar,
+            },
+            color: user.team.color
+        };
+
+        return {
+            content: `\`\`\`js\n${prettyCode}\`\`\``,
+            embed: embed,
+        }
+    }
 
     const embed: MessageEmbedOptions = {
         author: {
@@ -16,7 +31,7 @@ export default async function createPlayerEmbed({ user, client }: { user: User; 
         title: prettyCode,
         description: `<@${user.user_id}>`,
         footer: {
-            text: 'Mobile users: Tap+Hold the friend code to copy',
+            text: `To copy this code on mobile: /p ${user.username} -c`,
             icon_url: user.team.icon
         },
         thumbnail: {
@@ -27,7 +42,6 @@ export default async function createPlayerEmbed({ user, client }: { user: User; 
     };
 
     return {
-        // content: `${prettyCode}`,
         embed: embed,
         files: [{
             attachment: qrBuffer,

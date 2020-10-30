@@ -35,12 +35,12 @@ export default class LookupCommand extends Command {
             if (codeTypeCaster(message, args.query) != null) {
                 type = 'friend code'
                 const user = await User.findByPk(args.query);
-                if (user) return [ user ];
+                if (user) return [user];
                 return [];
             }
             if (nameTypeCaster(message, args.query) != null) {
                 type = 'Pokemon GO username'
-                return User.findAll({ where: Sequelize.where(Sequelize.fn('lower', Sequelize.col('username')), args.query.toLowerCase())  });
+                return User.findAll({ where: Sequelize.where(Sequelize.fn('lower', Sequelize.col('username')), args.query.toLowerCase()) });
             }
             const matches = args.query ? args.query.match(/<@!?(\d{17,19})>/) : null;
             if (matches) {
@@ -65,7 +65,15 @@ export default class LookupCommand extends Command {
         const promises = new Array<Promise<Message | Message[]>>();
         for (let i = 0; i < users.length; i++) {
             const user = users[i];
-            if (args.codeOnly) promises.push(message.channel.send(user.code, { code: 'js' }));
+            if (args.codeOnly) promises.push(
+                message.channel.send(
+                    await createPlayerEmbed({
+                        client: this.client,
+                        user: user,
+                        simple: true
+                    })
+                )
+            );
             else promises.push(
                 message.channel.send(
                     await createPlayerEmbed({
