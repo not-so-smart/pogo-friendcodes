@@ -15,4 +15,3 @@ export default class ExportCommand extends Command {
         return message.channel.send(await exportUsers(this.client));
     }
 }
-
